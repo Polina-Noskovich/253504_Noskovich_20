@@ -1,9 +1,8 @@
 import math
 from decorator import funcInfoDec
 
-@funcInfoDec
 def get_input():
-    """Function to get input from the user"""
+    """Function to get input from the user."""
     while True:
         try:
             x = float(input("Enter x value for decomposing the function into a Taylor series: "))
@@ -15,9 +14,9 @@ def get_input():
         except ValueError:
             print("Wrong input")
 
-
+@funcInfoDec
 def calculate_tailor(x, eps):
-    """Function to calculate Taylor series approximation"""
+    """Function to calculate Taylor series approximation."""
     result = 0.0
     for n in range(1, 500):
         result += x**n 
@@ -29,6 +28,6 @@ def calculate_tailor(x, eps):
 
 
 def task1():
-    """Function to perform Task 1"""
+    """Function to perform Task 1."""
     x, eps= get_input()
     calculate_tailor(x, eps)

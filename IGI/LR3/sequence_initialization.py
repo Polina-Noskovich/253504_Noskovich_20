@@ -1,9 +1,12 @@
-def initialize_with_generator(sequence):
-    """Initialize sequence using a generator function"""
-    return list(sequence)
+def my_generator(first=0, last=10, step=1):
+    """Creating my own generator."""
+    number = first
+    while number < last:
+        yield number
+        number += step
 
 def initialize_with_user_input():
-    """Initialize sequence using user input"""
+    """Initialize sequence using user input."""
     sequence = []
     while True:
         try:

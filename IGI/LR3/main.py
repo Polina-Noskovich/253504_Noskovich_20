@@ -7,13 +7,12 @@ from task5 import task5
 
 #   -----LAB #3. Standard data types, collections, functions, modules.-----
 #   Developed by Polina Noskovich. Gr.253504
-#   Version 1.0
+#   Version 1.0.0
 #   Date: 30.03.2024
-
 # Infinite loop to allow the user to choose and perform tasks repeatedly
 while True:
-    print("\033[33m\033[1m Select one of the five task numbers")
-    choice = input()
+    choice = input("\033[33m\033[1mSelect one of the five task numbers: ")
+    print("\033[00m")
 
     match choice:
         case "1":
@@ -29,7 +28,7 @@ while True:
         case _:
             print("\033[96m Program was finished ")
             break
-    choice = input("Would you like to perform another task? (y/n): ").lower()
+    choice = input("\033[33m\033[1mWould you like to perform another task? (y/n): ").lower()
     if choice == "n":
         print("\033[96m Program was finished ")
         break
