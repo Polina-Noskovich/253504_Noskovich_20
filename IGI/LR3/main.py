@@ -11,7 +11,7 @@ from task5 import task5
 #   Date: 30.03.2024
 # Infinite loop to allow the user to choose and perform tasks repeatedly
 while True:
-    choice = input("\033[33m\033[1mSelect one of the five task numbers: ")
+    choice = input("\033[92m\033[1mSelect one of the five task numbers: ")
     print("\033[00m")
 
     match choice:
@@ -28,7 +28,7 @@ while True:
         case _:
             print("\033[96m Program was finished ")
             break
-    choice = input("\033[33m\033[1mWould you like to perform another task? (y/n): ").lower()
+    choice = input("\033[92m\033[1mWould you like to perform another task? (y/n): ").lower()
     if choice == "n":
         print("\033[96m Program was finished ")
         break

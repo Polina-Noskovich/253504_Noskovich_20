@@ -8,6 +8,7 @@ def count_words_in_quotes(text):
     for char in text:
         if char == '"':
             inside_quotes = not inside_quotes
+            count = 1
         elif char == ' ' and inside_quotes:
             count += 1
     return count
@@ -31,7 +32,7 @@ def extract_phrases_separated_by_commas(text):
     return phrases
 
 def task4():
-    input_text = "So she was considering in her own mind, as well as she could, for the hot day made her feel very sleepy and stupid, whether the pleasure of making a daisy-chain would be worth the trouble of getting up and picking the daisies, when suddenly a White Rabbit with pink eyes ran close by her."
+    input_text = 'So she was considering in "her own mind", as well as she could, for the hot day made her feel very sleepy and stupid, whether the pleasure of making a daisy-chain would be worth the trouble of getting up and picking the daisies, when suddenly a White Rabbit with pink eyes ran close by her.'
 
     # a) Determine the number of words enclosed in quotation marks ("").
     quote_count = count_words_in_quotes(input_text)
