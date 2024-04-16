@@ -8,7 +8,6 @@ def count_words_in_quotes(text):
     for char in text:
         if char == '"':
             inside_quotes = not inside_quotes
-            count = 1
         elif char == ' ' and inside_quotes:
             count += 1
     return count

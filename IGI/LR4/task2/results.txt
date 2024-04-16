@@ -1,0 +1,12 @@
+Number of sentences: 8
+Number of narrative sentences: 2
+Number of interrogative sentences: 2
+Number of imperative sentences: 3
+Average sentence length: 2.875
+Average word length: 4.0
+Number of smileys: 1
+List of dates: ['2023']
+Words with consonant-vowel pattern: ['This', 'sentences']
+Number of words: 23
+Longest word: interesting, Position: 13
+Odd words: ['This', 'a', 'text', 'contains', 'sentences', 't', 'interesting', 'Let', 'analyze', 'Shall', '2023']
