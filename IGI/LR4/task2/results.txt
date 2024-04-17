@@ -1,4 +1,4 @@
-Number of sentences: 8
+Number of sentences: 7
 Number of narrative sentences: 2
 Number of interrogative sentences: 2
 Number of imperative sentences: 3

@@ -2,105 +2,129 @@ import csv
 import pickle
 import sys
 import os
-# Получаем путь к текущей директории (где находится task3.py)
+# Get the path to the current directory (where task1.py is located)
+# Go up a level to access the LR4 directory
+# Add the path to the LR4 directory to PYTHONPATH
+# Now we can import the task module
 current_dir = os.path.dirname(os.path.abspath(__file__))
-# Переходим на уровень выше, чтобы получить доступ к каталогу LR4
 parent_dir = os.path.dirname(current_dir)
-# Добавляем путь к каталогу LR4 в PYTHONPATH
 sys.path.append(parent_dir)
-# Теперь мы можем импортировать модуль task
 from task import Task
 
 class Student:
+    """Represents a student with surname, street, house, and apartment attributes."""
+
     def __init__(self, surname, street, house, apartment):
+        """Initializes a Student object with the given attributes."""
         self.surname = surname
         self.street = street
         self.house = house
         self.apartment = apartment
 
     def __repr__(self):
-        return f"{self.surname}, {self.street}, д. {self.house}, кв. {self.apartment}"
+        """Returns a string representation of the Student object."""
+        return f"{self.surname}, {self.street}, building {self.house}, apartment {self.apartment}"
 
 class School:
-    def __init__(self):
-        self.students = []
+    """Represents a school with a collection of students."""
 
-    def add_student(self, student):
-        self.students.append(student)
+    def __init__(self):
+        """Initializes a School object with an empty dictionary of students."""
+        self.students = {}
 
     def students_on_street(self, street_name):
-        return [student for student in self.students if student.street == street_name]
-
+        """Retrieves a list of students who live on the specified street."""
+        return [student for student in self.students.values() if student.street == street_name]
+    
     def students_in_house(self, house_number):
-        return [student for student in self.students if student.house == house_number]
+        """Retrieves a list of students who live in the specified house."""
+        return [student for student in self.students.values() if student.house == house_number]
+
+    def add_student(self, student_id, student):
+        """Adds a student to the school."""
+        self.students[student_id] = student
 
     def save_to_csv(self, filename):
+        """Saves the school's student data to a CSV file."""
         with open(filename, mode='w', newline='') as file:
             writer = csv.writer(file)
-            for student in self.students:
-                writer.writerow([student.surname, student.street, student.house, student.apartment])
+            for student_id, student in self.students.items():
+                writer.writerow([student_id, student.surname, student.street, student.house, student.apartment])
 
     def load_from_csv(self, filename):
+        """Loads student data from a CSV file into the school."""
         with open(filename, mode='r') as file:
             reader = csv.reader(file)
             for row in reader:
-                self.add_student(Student(*row))
+                student_id, surname, street, house, apartment = row
+                self.add_student(student_id, Student(surname, street, house, apartment))
 
     def save_to_pickle(self, filename):
+        """Saves the school's student data to a pickle file."""
         with open(filename, 'wb') as file:
             pickle.dump(self.students, file)
 
     def load_from_pickle(self, filename):
+        """Loads student data from a pickle file into the school."""
         with open(filename, 'rb') as file:
             self.students = pickle.load(file)
 
-
-
 class Task1(Task):
-    @staticmethod
-    def perform():
-        school = School()
-        school.add_student(Student("Иванов", "Пушкина", 10, 5))
-        school.add_student(Student("Петров", "Ленина", 5, 15))
-        school.add_student(Student("Сидоров", "Пушкина", 10, 7))
-        school.add_student(Student("Носкович", "Прушинских", 78, 1))
-        school.add_student(Student("Гусева", "Прушинских", 10, 7))
+    """Represents Task1, a specific task involving school management."""
 
-        # Сохранение в файлы CSV и pickle
+    @staticmethod
+    def complete_task():
+        """
+        Completes the Task1 assignment.
+
+        The function creates a School object, adds students to it, saves the data to CSV and pickle files,
+        loads the data from the files into a new School object, performs operations on the data, and displays the results.
+        """
+        school = School()
+        school.add_student(1, Student("Ivanov", "Gikalo", 10, 5))
+        school.add_student(2, Student("Petrov", "Lenina", 5, 15))
+        school.add_student(3, Student("Sidorov", "Gikalo", 10, 7))
+        school.add_student(4, Student("Noskovich", "Prushinskih", 78, 1))
+        school.add_student(5, Student("Guseva", "Prushinskih", 10, 7))
+
+        # Saving to CSV and pickle files
         school.save_to_csv("task1/students.csv")
         school.save_to_pickle("task1/students.pickle")
 
-        # Создание нового объекта School и загрузка данных из файлов
-        input("\033[33m\033[1mCSV:")
+        # Creating a new School object and loading data from files
+        input("\033[37m\033[1mCSV:")
+        print("\033[00m")
         new_school = School()
         new_school.load_from_csv("task1/students.csv")
         print(new_school.students)
+        input("\033[37m\033[1m\nPickle:")
         print("\033[00m")
-        input("\033[33m\033[1mPickle:")
         new_school.load_from_pickle("task1/students.pickle")
         print(new_school.students)
         print("\033[00m")
-        # Создаем объект школы
+        # Creating a school object
         school = School()
         
-        # Загружаем данные из файла
-        school.load_from_csv("task1/students.csv")  # Можно использовать любой формат сохранения
+        # Loading data from file
+        school.load_from_csv("task1/students.csv")  # Any saving format can be used
 
-        # Вводим с клавиатуры название улицы и номер дома
-        street_name = input("Введите название улицы: ")
-        house_number = input("Введите номер дома: ")
+        # Taking street name and house number from the keyboard
+        street_name = input("\033[37m\033[1mEnter the street name: \033[00m")
+        house_number = input("\033[37m\033[1mEnter the house number: \033[00m")
+        print("\033[37m\033[1m     --------------------------")
 
-        # Определяем количество учеников на указанной улице
+        # Determining the number of students on the specified street
         students_on_street = school.students_on_street(street_name)
-        print(f"Количество учеников на улице {street_name}: {len(students_on_street)}")
+        print(f"\033[37m\033[1mNumber of students on \033[37m\033[4m{street_name}\033[37m\033[0m\033[1m street: \033[00m{len(students_on_street)}")
         
-        # Выводим список учеников, живущих в указанном доме
+        # Displaying a list of students living in the specified house
         students_in_house = school.students_in_house(house_number)
         if students_in_house:
-            print(f"Список учеников, живущих в доме {house_number}:")
+            print(f"\033[37m\033[1mList of students living in house \033[37m\033[4m{house_number}\033[37m\033[0m:\033[00m")
             for student in students_in_house:
                 print(student)
         else:
-            print(f"В доме {house_number} не живут ученики.")
+            print(f"No students live in house {house_number}.")
 
-# Task1.perform()
+# Task1.complete_task()
+

@@ -5,5 +5,5 @@ class Task(ABC):
     '''task module'''
     @staticmethod
     @abstractmethod
-    def perform():
+    def complete_task():
         pass
