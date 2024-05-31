@@ -11,14 +11,12 @@ from task5.task5 import Task5
 # Date: 15.04.2024
 
 class Program:
-
     @staticmethod
     def complete_task():
         while True:  
             try:  
                 choice = int(input("\033[33m\033[1mSelect one of the five task numbers: "))
                 print("\033[00m")
-
                 match choice:
                     case 1:
                         task1 = Task1()

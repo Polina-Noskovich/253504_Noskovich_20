@@ -13,7 +13,6 @@ from task import Task
 
 class Student:
     """Represents a student with surname, street, house, and apartment attributes."""
-
     def __init__(self, surname, street, house, apartment):
         """Initializes a Student object with the given attributes."""
         self.surname = surname
@@ -27,7 +26,6 @@ class Student:
 
 class School:
     """Represents a school with a collection of students."""
-
     def __init__(self):
         """Initializes a School object with an empty dictionary of students."""
         self.students = {}
@@ -71,12 +69,10 @@ class School:
 
 class Task1(Task):
     """Represents Task1, a specific task involving school management."""
-
     @staticmethod
     def complete_task():
         """
         Completes the Task1 assignment.
-
         The function creates a School object, adds students to it, saves the data to CSV and pickle files,
         loads the data from the files into a new School object, performs operations on the data, and displays the results.
         """
@@ -89,7 +85,7 @@ class Task1(Task):
 
         # Saving to CSV and pickle files
         school.save_to_csv("task1/students.csv")
-        school.save_to_pickle("task1/students.pickle")
+        school.save_to_pickle("task1/students.pkl")
 
         # Creating a new School object and loading data from files
         input("\033[37m\033[1mCSV:")
@@ -99,7 +95,7 @@ class Task1(Task):
         print(new_school.students)
         input("\033[37m\033[1m\nPickle:")
         print("\033[00m")
-        new_school.load_from_pickle("task1/students.pickle")
+        new_school.load_from_pickle("task1/students.pkl")
         print(new_school.students)
         print("\033[00m")
         # Creating a school object
@@ -126,5 +122,5 @@ class Task1(Task):
         else:
             print(f"No students live in house {house_number}.")
 
-# Task1.complete_task()
+Task1.complete_task()
 

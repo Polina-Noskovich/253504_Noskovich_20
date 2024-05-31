@@ -9,20 +9,17 @@ parent_dir = os.path.dirname(current_dir)
 sys.path.append(parent_dir)
 from task import Task
 
-class AttributesCalculator:
-    @staticmethod
-    def calculate_dispersion(series):
-        """Calculates the dispersion of a series."""
-        average = sum(series)/len(series)
-        elements_sum = sum(i*i for i in series)
-        return elements_sum/len(series) - average**2
-
-class Series:
+class CalculateSeries:
     def __init__(self, x, eps):
         """Initializes Series object."""
         self._x = x
         self._eps = eps
-        self._attribute_calculator = AttributesCalculator()
+
+    def calculateDispersion(self, series):
+        """Calculates the dispersion of a series."""
+        average = sum(series)/len(series)
+        elements_sum = sum(i*i for i in series)
+        return elements_sum/len(series) - average**2
 
     def calculateSeries(self):
         """Function to calculate Taylor series approximation."""
@@ -42,8 +39,8 @@ class Series:
                 print(f"Arithmetic mean of sequence elements: {round(result/(n + 1), 10)}")
                 print(f"Median of sequence elements: {median(series)}")
                 print(f"Mode of sequence elements: {mode(series)}")
-                print(f"Dispersion of sequence elements: {self._attribute_calculator.calculate_dispersion(series)}")
-                print(f"Sequence standard deviation: {sqrt(self._attribute_calculator.calculate_dispersion(series))}")
+                print(f"Dispersion of sequence elements: {self.calculateDispersion(series)}")
+                print(f"Sequence standard deviation: {sqrt(self.calculateDispersion(series))}")
                 return series, n
 
         print("Iterations > 500")
@@ -60,9 +57,8 @@ class PlotDrawer:
         x = np.linspace(-0.25, 1, 80)
         y1 = 1/(1-x)
         y2 = sum(x**i for i in range(self._n))
-        plt.plot(x, y1, label='1/(1-x)', color='blue', linewidth=2)  # Синий цвет и толщина линии 2
-        plt.plot(x, y2, label='∑x^n', color='orange', linewidth=2)  # Оранжевый цвет и толщина линии 2
-        plt.subplots_adjust(bottom=0.05, left=0.05)
+        plt.plot(x, y1, label='1/(1-x)', color='blue', linewidth=3)  # Синий цвет и толщина линии 3
+        plt.plot(x, y2, label='∑x^n', color='orange', linewidth=3)  # Оранжевый цвет и толщина линии 3
 
         plt.legend()
         plt.xlabel('X')
@@ -93,7 +89,7 @@ class Task3(Task):
                     print("|x| >= 1. Enter again.")
                 else:
                     eps = float(input("Enter eps value of the calculation accuracy: "))
-                    series = Series(x, eps)
+                    series = CalculateSeries(x, eps)
                     series_list, n = series.calculateSeries()
 
                     series_plot = PlotDrawer(series_list, n)

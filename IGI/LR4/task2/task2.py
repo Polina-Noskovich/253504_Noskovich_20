@@ -9,7 +9,6 @@ from task import Task
 
 class TextAnalyzer:
     """A class for analyzing text files."""
-
     def __init__(self, filename):
         """Initializes the TextAnalyzer object."""
         self.filename = filename
@@ -26,15 +25,15 @@ class TextAnalyzer:
 
     def count_sentence_types(self):
         """Counts the number of different types of sentences."""
-        narrative = len(re.findall(r'[^.!?]+[.]+[^.!?]*', self.text))
-        interrogative = len(re.findall(r'[?]', self.text))
-        imperative = len(re.findall(r'[!]', self.text))
+        narrative = len(re.findall(r'[^.!?]+[.]', self.text))
+        interrogative = len(re.findall(r'[^.!?]+[?]', self.text))
+        imperative = len(re.findall(r'[^.!?]+[!]', self.text))
         return narrative, interrogative, imperative
 
     def average_sentence_length(self):
         """Calculates the average length of sentences."""
-        words_per_sentence = [len(re.findall(r'\b\w+\b', sentence)) for sentence in re.split(r'[.!?]', self.text) if sentence]
-        return sum(words_per_sentence) / len(words_per_sentence)
+        words_in_sentence = [len(re.findall(r'\b\w+\b', sentence)) for sentence in re.split(r'[.!?]', self.text) if sentence]
+        return sum(words_in_sentence) / len(words_in_sentence)
 
     def average_word_length(self):
         """Calculates the average length of words."""

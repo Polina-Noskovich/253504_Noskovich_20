@@ -8,19 +8,38 @@ from task import Task
 
 class Matrix:
     def __init__(self, data):
+        """Initializes a Matrix object with the given data."""
         self.data = np.array(data)
+        
+    def __repr__(self):
+        """Returns the string representation of the Matrix."""
+        return f"Matrix({self.data})"
+
+    def __str__(self):
+        """Returns the string representation of the Matrix."""
+        return str(self.data)
+
+    def __getitem__(self, index):
+        """Allows accessing elements of the Matrix using indexing."""
+        return self.data[index]
+
+    def __len__(self):
+        """Returns the number of rows in the Matrix."""
+        return len(self.data)
+
 
     def sort_last_row(self):
+        """Sorts the last row of the Matrix in ascending order."""
         self.data[-1] = np.sort(self.data[-1])
 
     def get_last_row(self):
+        """Returns the last row of the Matrix. """
         return self.data[-1]
 
     def compute_median(self):
-        # Медиана через стандартную функцию
+        """Computes the median of the last row of the Matrix."""
         median_std = np.median(self.data[-1])
 
-        # Медиана через программирование формулы (если количество элементов нечетное)
         sorted_row = np.sort(self.data[-1])
         n = len(sorted_row)
         if n % 2 == 1:
@@ -29,7 +48,6 @@ class Matrix:
             median_formula = (sorted_row[n // 2 - 1] + sorted_row[n // 2]) / 2
 
         return median_std, median_formula
-
 
 class Task5(Task):
     """

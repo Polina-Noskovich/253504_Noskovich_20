@@ -23,7 +23,7 @@ class GeometricShape(ABC):
     '''An abstract class representing a geometric shape.'''
     def __init__(self, name, color):
         '''Initializes a geometric shape with a given name and color.'''
-        self._shape_name = name
+        self._name = name
         self._color = ShapeColor(color)
 
     @abstractmethod
@@ -33,7 +33,7 @@ class GeometricShape(ABC):
 
     def getName(self):
         '''Returns the name of the shape.'''
-        return self._shape_name
+        return self._name
 
     def getColor(self):
         '''Returns the color of the shape.'''
@@ -52,7 +52,16 @@ class ShapeColor:
         '''Returns the color of the shape.'''
         return self._color
 
-    color = property(getColor)
+    def setColor(self, value):
+        '''Sets the color of the shape.'''
+        self._color = value
+
+    def delColor(self):
+        '''Deletes the color of the shape.'''
+        del self._color
+
+    color = property(getColor, setColor, delColor, "The color of the shape")
+
 
 class Parallelogram(GeometricShape, ResizableMixin):
     '''A class representing a parallelogram.'''
@@ -105,7 +114,7 @@ class ParallelogramDrawer:
 
         plt.fill(dots[hull.vertices, 0], dots[hull.vertices, 1], self._parallelogram.color.color)
 
-        plt.axis('equal')
+        plt.axis()
         plt.xlabel('X')
         plt.ylabel('Y')
 
@@ -140,6 +149,4 @@ class Task4(Task):
                 print("Wrong input")
 
 # Task4.complete_task()
-
-
-# Task4.complete_task()
+Task4.complete_task()
